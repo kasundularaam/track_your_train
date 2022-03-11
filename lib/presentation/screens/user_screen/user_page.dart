@@ -55,7 +55,10 @@ class _UserPageState extends State<UserPage> {
             MarkerLayerOptions(
               markers: [
                 Marker(
-                  point: latLng.LatLng(lat, long),
+                  point: latLng.LatLng(
+                    lat,
+                    long,
+                  ),
                   builder: (ctx) => const Icon(
                     Icons.train_rounded,
                     size: 40,
