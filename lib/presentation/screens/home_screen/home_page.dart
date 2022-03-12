@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../router/app_router.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
                     Navigator.pushNamed(context, AppRouter.userPage),
                 child: const Text("User"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               TextButton(
