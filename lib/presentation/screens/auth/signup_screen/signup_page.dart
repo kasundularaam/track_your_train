@@ -22,7 +22,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightColor,
+      backgroundColor: AppColors.lightElv0,
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -115,19 +115,6 @@ class _SignInPageState extends State<SignInPage> {
               onPress: () => Navigator.of(context).pushNamedAndRemoveUntil(
                   AppRouter.landingPage, (route) => false),
             )),
-            SizedBox(
-              height: 5.h,
-            ),
-            Center(
-              child: Text(
-                "Forgot password?",
-                style: TextStyle(
-                  color: AppColors.primaryColor,
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
             SizedBox(
               height: 5.h,
             ),

@@ -13,12 +13,12 @@ class LoginCubit extends Cubit<LoginState> {
       emit(
         LoginLoading(),
       );
-      await HTTPServices.loginUser(
+      AppUser user = await HTTPServices.loginUser(
         email: email,
         password: password,
       );
       emit(
-        LoginSucceed(appUser: AppUser(email: "email", isUser: false)),
+        LoginSucceed(appUser: user),
       );
     } catch (e) {
       emit(

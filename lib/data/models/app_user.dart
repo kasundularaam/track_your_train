@@ -2,33 +2,33 @@ import 'dart:convert';
 
 class AppUser {
   final String email;
-  final bool isUser;
+  final bool isDriver;
   AppUser({
     required this.email,
-    required this.isUser,
+    required this.isDriver,
   });
 
   AppUser copyWith({
     String? email,
-    bool? isUser,
+    bool? isDriver,
   }) {
     return AppUser(
       email: email ?? this.email,
-      isUser: isUser ?? this.isUser,
+      isDriver: isDriver ?? this.isDriver,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'email': email,
-      'isUser': isUser,
+      'isDriver': isDriver,
     };
   }
 
   factory AppUser.fromMap(Map<String, dynamic> map) {
     return AppUser(
       email: map['email'] ?? '',
-      isUser: map['isUser'] ?? false,
+      isDriver: map['isDriver'] ?? false,
     );
   }
 
@@ -38,15 +38,17 @@ class AppUser {
       AppUser.fromMap(json.decode(source));
 
   @override
-  String toString() => 'AppUser(email: $email, isUser: $isUser)';
+  String toString() => 'AppUser(email: $email, isDriver: $isDriver)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is AppUser && other.email == email && other.isUser == isUser;
+    return other is AppUser &&
+        other.email == email &&
+        other.isDriver == isDriver;
   }
 
   @override
-  int get hashCode => email.hashCode ^ isUser.hashCode;
+  int get hashCode => email.hashCode ^ isDriver.hashCode;
 }

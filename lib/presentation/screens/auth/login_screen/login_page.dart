@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightColor,
+      backgroundColor: AppColors.lightElv0,
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -97,8 +97,8 @@ class _LoginPageState extends State<LoginPage> {
                   if (state is LoginSucceed) {
                     emailController.clear();
                     passwordController.clear();
-
-                    if (!state.appUser.isUser) {
+                    log("${state.appUser}");
+                    if (!state.appUser.isDriver) {
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         AppRouter.userPage,
                         (route) => false,

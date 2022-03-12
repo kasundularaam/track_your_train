@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:track_your_train/core/exceptions/route_exception.dart';
@@ -18,6 +19,7 @@ class HTTPServices {
           ),
         );
         if (response.statusCode == 200) {
+          log(response.body);
           return AppUser.fromJson(response.body);
         } else {
           throw Failure(message: '${response.statusCode}');

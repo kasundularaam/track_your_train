@@ -7,7 +7,7 @@ import '../models/lat_long.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class DriverSocket {
-  IO.Socket socket = IO.io('http://192.168.8.102:3000', <String, dynamic>{
+  IO.Socket socket = IO.io('http://192.168.8.100:3000', <String, dynamic>{
     "transports": ["websocket"],
     "autoConnect": false
   });

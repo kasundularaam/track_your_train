@@ -56,11 +56,7 @@ class _DriverPageState extends State<DriverPage> {
               markers: [
                 Marker(
                   point: latLng.LatLng(lat, long),
-                  builder: (ctx) => const Icon(
-                    Icons.train_rounded,
-                    size: 40,
-                    color: Colors.red,
-                  ),
+                  builder: (ctx) => Image.asset("assets/images/train.png"),
                 ),
               ],
             ),
