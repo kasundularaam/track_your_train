@@ -2,12 +2,14 @@
 
 class DataProvider {
   static String loginUrl({required String email, required String password}) =>
-      "http://192.168.8.100:3000/login/$email/$password";
+      "$serverAddress/login/$email/$password";
 
   static String signInUrl(
           {required String name,
           required String email,
           required String password,
           required String confirmPassword}) =>
-      "http://127.0.0.1:3000/signin/$name/$email/$password/$confirmPassword";
+      "$serverAddress/signin/$name/$email/$password/$confirmPassword";
 }
+
+const String serverAddress = "http://15.206.173.183:3000";

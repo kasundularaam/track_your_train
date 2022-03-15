@@ -1,10 +1,11 @@
 import 'dart:async';
 
+import '../data_providers/data_provider.dart';
 import '../models/lat_long.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class UserSocket {
-  IO.Socket socket = IO.io('http://192.168.8.100:3000', <String, dynamic>{
+  IO.Socket socket = IO.io(serverAddress, <String, dynamic>{
     "transports": ["websocket"],
     "autoConnect": false
   });

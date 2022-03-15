@@ -1,21 +1,28 @@
+import "package:latlong2/latlong.dart" as latLng;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
-import "package:latlong2/latlong.dart" as latLng;
 import 'package:sizer/sizer.dart';
-import 'package:track_your_train/core/themes/app_colors.dart';
-import 'package:track_your_train/presentation/screens/auth/widgets/auth_button.dart';
 
-import '../../../logic/cubit/get_location_cubit/get_location_cubit.dart';
+import 'package:track_your_train/data/models/type_user.dart';
+
+import '../../../../core/themes/app_colors.dart';
+import '../../../../logic/cubit/get_location_cubit/get_location_cubit.dart';
+import '../../auth/widgets/auth_button.dart';
 
 class UserPage extends StatefulWidget {
-  const UserPage({Key? key}) : super(key: key);
+  final TypeUser typeUser;
+  const UserPage({
+    Key? key,
+    required this.typeUser,
+  }) : super(key: key);
 
   @override
   _UserPageState createState() => _UserPageState();
 }
 
 class _UserPageState extends State<UserPage> {
+  TypeUser get typeUser => widget.typeUser;
   @override
   void dispose() {
     super.dispose();

@@ -4,9 +4,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:track_your_train/logic/cubit/login_cubit/login_cubit.dart';
 
+import '../../../../core/enums/user_type.dart';
 import '../../../../core/themes/app_colors.dart';
+import '../../../../logic/cubit/login_cubit/login_cubit.dart';
 import '../../../router/app_router.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/auth_text_input.dart';
@@ -28,6 +29,11 @@ class _LoginPageState extends State<LoginPage> {
       email: email,
       password: password,
     );
+  }
+
+  void clearControllers() {
+    emailController.clear();
+    passwordController.clear();
   }
 
   @override
@@ -95,18 +101,26 @@ class _LoginPageState extends State<LoginPage> {
               child: BlocConsumer<LoginCubit, LoginState>(
                 listener: (context, state) {
                   if (state is LoginSucceed) {
-                    emailController.clear();
-                    passwordController.clear();
-                    log("${state.appUser}");
-                    if (!state.appUser.isDriver) {
+                    clearControllers();
+                    log("${state.typeUser}");
+                    final UserType userType = state.typeUser.userType;
+                    if (userType == UserType.user) {
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         AppRouter.userPage,
                         (route) => false,
+                        arguments: state.typeUser,
                       );
-                    } else {
+                    } else if (userType == UserType.driver) {
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         AppRouter.driverPage,
                         (route) => false,
+                        arguments: state.typeUser,
+                      );
+                    } else {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        AppRouter.ticketCheckerPage,
+                        (route) => false,
+                        arguments: state.typeUser,
                       );
                     }
                   } else if (state is LoginFailed) {

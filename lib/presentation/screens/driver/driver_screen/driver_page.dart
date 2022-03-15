@@ -1,18 +1,25 @@
+import "package:latlong2/latlong.dart" as latLng;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
-import "package:latlong2/latlong.dart" as latLng;
 
-import '../../../logic/cubit/send_location_cubit/send_location_cubit.dart';
+import '../../../../data/models/type_user.dart';
+import '../../../../logic/cubit/send_location_cubit/send_location_cubit.dart';
 
 class DriverPage extends StatefulWidget {
-  const DriverPage({Key? key}) : super(key: key);
+  final TypeUser typeUser;
+  const DriverPage({
+    Key? key,
+    required this.typeUser,
+  }) : super(key: key);
 
   @override
   _DriverPageState createState() => _DriverPageState();
 }
 
 class _DriverPageState extends State<DriverPage> {
+  TypeUser get typeUser => widget.typeUser;
+
   @override
   void dispose() {
     super.dispose();

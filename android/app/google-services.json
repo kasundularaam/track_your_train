@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "870348995801",
+    "project_id": "track-your-train-842bc",
+    "storage_bucket": "track-your-train-842bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870348995801:android:364089e989839a6911d2c8",
+        "android_client_info": {
+          "package_name": "com.trackyourtrain.track_your_train"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870348995801-agc5fl0vdsfnvterrmfl54ih0pijeuul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6zJvEFTFYzJP4z2CIbBHBpicVjV7v5XY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870348995801-agc5fl0vdsfnvterrmfl54ih0pijeuul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

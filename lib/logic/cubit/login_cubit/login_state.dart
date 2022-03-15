@@ -8,23 +8,23 @@ class LoginInitial extends LoginState {}
 class LoginLoading extends LoginState {}
 
 class LoginSucceed extends LoginState {
-  final AppUser appUser;
+  final TypeUser typeUser;
   LoginSucceed({
-    required this.appUser,
+    required this.typeUser,
   });
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is LoginSucceed && other.appUser == appUser;
+    return other is LoginSucceed && other.typeUser == typeUser;
   }
 
   @override
-  int get hashCode => appUser.hashCode;
+  int get hashCode => typeUser.hashCode;
 
   @override
-  String toString() => 'LoginSucceed(appUser: $appUser)';
+  String toString() => 'LoginSucceed(typeUser: $typeUser)';
 }
 
 class LoginFailed extends LoginState {
