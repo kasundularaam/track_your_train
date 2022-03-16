@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:track_your_train/data/models/app_user.dart';
 
 import '../models/type_user.dart';
 
@@ -20,6 +21,15 @@ class FireAuth {
 
   static String get uid => currentUser.uid;
 
+  static bool get signed {
+    User? user = auth.currentUser;
+    if (user != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   static Future<User> registerUser(
       {required String email, required String password}) async {
     try {
@@ -39,6 +49,14 @@ class FireAuth {
           email: email, password: password);
 
       return userCredential.user!;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  static Future<void> addNewUser({required AppUser appUser}) async {
+    try {
+      await usersRef.doc(appUser.userId).set(appUser.toMap());
     } catch (e) {
       throw e.toString();
     }

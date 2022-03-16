@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
+import 'package:track_your_train/data/shared/shared_auth.dart';
 
 import '../../../core/enums/user_type.dart';
 import '../../../data/checker/ticket_checker_checker.dart';
@@ -21,6 +23,8 @@ class LoginCubit extends Cubit<LoginState> {
       if (validatedLogin) {
         TypeUser typeUser =
             await getUserTypeData(email: email, password: password);
+        await SharedAuth.clearData();
+        await SharedAuth.addUser(typeUser: typeUser);
         emit(LoginSucceed(typeUser: typeUser));
       }
     } catch (e) {
@@ -36,14 +40,19 @@ class LoginCubit extends Cubit<LoginState> {
           email: email, password: password);
 
       if (isTicketChecker) {
-        return TypeUser(
-          email: email,
-          uid: TicketCheckerChecker.uid,
+        TypeUser typeUser = TypeUser(
+          userId: TicketCheckerChecker.uid,
+          userEmail: email,
           userType: UserType.ticketChecker,
         );
+        await SharedAuth.clearData();
+        await SharedAuth.addUser(typeUser: typeUser);
+        return typeUser;
       }
 
-      TypeUser fireUser = await FireAuth.getTypeUser(uid: FireAuth.uid);
+      User user = await FireAuth.signInUser(email: email, password: password);
+
+      TypeUser fireUser = await FireAuth.getTypeUser(uid: user.uid);
       return fireUser;
     } catch (e) {
       throw e.toString();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../core/themes/app_colors.dart';
@@ -20,25 +21,31 @@ class _TicketCheckerPageState extends State<TicketCheckerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.lightElv0,
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              Text(typeUser.email),
-              SizedBox(
-                height: 2.h,
-              ),
-              Text(typeUser.uid),
-              SizedBox(
-                height: 2.h,
-              ),
-              Text(typeUser.typeToString),
-              SizedBox(
-                height: 2.h,
-              ),
-            ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: AppColors.lightElv0,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+      child: Scaffold(
+        backgroundColor: AppColors.lightElv0,
+        body: SafeArea(
+          child: Center(
+            child: Column(
+              children: [
+                Text(typeUser.userEmail),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Text(typeUser.userId),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Text(typeUser.typeString),
+                SizedBox(
+                  height: 2.h,
+                ),
+              ],
+            ),
           ),
         ),
       ),

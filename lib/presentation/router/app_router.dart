@@ -6,8 +6,8 @@ import '../../data/models/type_user.dart';
 import '../../logic/cubit/get_location_cubit/get_location_cubit.dart';
 import '../../logic/cubit/landing_screen_cubit/landing_screen_cubit.dart';
 import '../../logic/cubit/login_cubit/login_cubit.dart';
+import '../../logic/cubit/register_cubit/register_cubit.dart';
 import '../../logic/cubit/send_location_cubit/send_location_cubit.dart';
-import '../../logic/cubit/sign_in_cubit/sign_in_cubit.dart';
 import '../screens/auth/landing_screen/landing_page.dart';
 import '../screens/auth/login_screen/login_page.dart';
 import '../screens/auth/signup_screen/signup_page.dart';
@@ -74,7 +74,7 @@ class AppRouter {
       case signInPage:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => SignInCubit(),
+            create: (context) => RegisterCubit(),
             child: const SignInPage(),
           ),
         );

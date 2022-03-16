@@ -1,62 +1,44 @@
 import 'dart:convert';
 
 import '../../core/enums/user_type.dart';
+import '../converters/user_type_converter.dart';
 
 class TypeUser {
-  final String email;
-  final String uid;
+  final String userId;
+  final String userEmail;
   final UserType userType;
   TypeUser({
-    required this.email,
-    required this.uid,
+    required this.userId,
+    required this.userEmail,
     required this.userType,
   });
 
   TypeUser copyWith({
-    String? email,
-    String? uid,
+    String? userId,
+    String? userEmail,
     UserType? userType,
   }) {
     return TypeUser(
-      email: email ?? this.email,
-      uid: uid ?? this.uid,
+      userId: userId ?? this.userId,
+      userEmail: userEmail ?? this.userEmail,
       userType: userType ?? this.userType,
     );
   }
 
-  String get typeToString {
-    if (userType == UserType.user) {
-      return "user";
-    }
-    if (userType == UserType.driver) {
-      return "driver";
-    }
-
-    return "ticketChecker";
-  }
-
-  static UserType stringToType(String typeString) {
-    if (typeString == "user") {
-      return UserType.user;
-    }
-    if (typeString == "driver") {
-      return UserType.user;
-    }
-    return UserType.ticketChecker;
-  }
+  String get typeString => typeToString(userType);
 
   Map<String, dynamic> toMap() {
     return {
-      'email': email,
-      'uid': uid,
-      'userType': typeToString,
+      'userId': userId,
+      'userEmail': userEmail,
+      'userType': typeString,
     };
   }
 
   factory TypeUser.fromMap(Map<String, dynamic> map) {
     return TypeUser(
-      email: map['email'] ?? '',
-      uid: map['uid'] ?? '',
+      userId: map['userId'] ?? '',
+      userEmail: map['userEmail'] ?? '',
       userType: stringToType(map['userType']),
     );
   }
@@ -68,18 +50,18 @@ class TypeUser {
 
   @override
   String toString() =>
-      'TypeUser(email: $email, uid: $uid, userType: $userType)';
+      'TypeUser(userId: $userId, userEmail: $userEmail, userType: $userType)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
     return other is TypeUser &&
-        other.email == email &&
-        other.uid == uid &&
+        other.userId == userId &&
+        other.userEmail == userEmail &&
         other.userType == userType;
   }
 
   @override
-  int get hashCode => email.hashCode ^ uid.hashCode ^ userType.hashCode;
+  int get hashCode => userId.hashCode ^ userEmail.hashCode ^ userType.hashCode;
 }
