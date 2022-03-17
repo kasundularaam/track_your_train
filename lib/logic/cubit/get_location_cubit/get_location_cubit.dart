@@ -13,7 +13,7 @@ class GetLocationCubit extends Cubit<GetLocationState> {
   void getLocation() {
     try {
       userSocket.getLocation().listen((latLong) {
-        emit(GetLocationGetting(latLong: latLong));
+        // emit(GetLocationGetting(latLong: latLong));
       });
     } catch (e) {
       emit(GetLocationFailed(errorMsg: e.toString()));

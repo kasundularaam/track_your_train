@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:track_your_train/data/models/train_location.dart';
+
 import '../data_providers/data_provider.dart';
 import '../models/lat_long.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -10,23 +12,23 @@ class UserSocket {
     "autoConnect": false
   });
 
-  final socketResponse = StreamController<LatLong>();
+  final socketResponse = StreamController<TrainLocation>();
 
-  void addResponse({required LatLong latLong}) =>
-      socketResponse.sink.add(latLong);
+  void addResponse({required TrainLocation trainLocation}) =>
+      socketResponse.sink.add(trainLocation);
 
-  Stream<LatLong> getResponse() => socketResponse.stream;
+  Stream<TrainLocation> getResponse() => socketResponse.stream;
 
   void dispose() {
     socket.dispose();
     socketResponse.close();
   }
 
-  Stream<LatLong> getLocation() async* {
+  Stream<TrainLocation> getLocation() async* {
     socket.connect();
     socket.on('user', (data) {
-      LatLong latLong = LatLong(lat: data["lat"], long: data["long"]);
-      addResponse(latLong: latLong);
+      TrainLocation trainLocation = TrainLocation.fromMap(data);
+      addResponse(trainLocation: trainLocation);
     });
     yield* getResponse();
   }

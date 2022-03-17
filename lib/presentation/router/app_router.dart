@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:track_your_train/logic/cubit/all_trains_cubit/all_trains_cubit.dart';
+import 'package:track_your_train/logic/cubit/sign_out_cubit/sign_out_cubit.dart';
 
 import '../../core/exceptions/route_exception.dart';
 import '../../data/models/type_user.dart';
@@ -30,8 +32,12 @@ class AppRouter {
       case userPage:
         TypeUser typeUser = settings.arguments as TypeUser;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => GetLocationCubit(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => AllTrainsCubit(),
+              ),
+            ],
             child: UserPage(
               typeUser: typeUser,
             ),
@@ -40,8 +46,12 @@ class AppRouter {
       case driverPage:
         TypeUser typeUser = settings.arguments as TypeUser;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => SendLocationCubit(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => SendLocationCubit(),
+              ),
+            ],
             child: DriverPage(
               typeUser: typeUser,
             ),
@@ -50,8 +60,8 @@ class AppRouter {
       case ticketCheckerPage:
         TypeUser typeUser = settings.arguments as TypeUser;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => GetLocationCubit(),
+          builder: (_) => MultiBlocProvider(
+            providers: [],
             child: TicketCheckerPage(
               typeUser: typeUser,
             ),

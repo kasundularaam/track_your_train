@@ -26,7 +26,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        statusBarColor: AppColors.landingScreenTop,
+        statusBarColor: AppColors.primaryColor,
         statusBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(

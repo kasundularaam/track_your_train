@@ -71,4 +71,12 @@ class FireAuth {
       throw e.toString();
     }
   }
+
+  static Future<void> signOut() async {
+    try {
+      auth.signOut();
+    } catch (e) {
+      throw e.toString();
+    }
+  }
 }
