@@ -16,7 +16,7 @@ UserType stringToType(String typeString) {
     return UserType.user;
   }
   if (typeString == "driver") {
-    return UserType.user;
+    return UserType.driver;
   }
   return UserType.ticketChecker;
 }

@@ -1,38 +1,52 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:location/location.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+
+import 'package:track_your_train/data/models/train_location.dart';
 
 import '../../core/uses_permission/location_services.dart';
 import '../data_providers/data_provider.dart';
-import '../models/lat_long.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class DriverSocket {
+  final String trainId;
+  final String trainName;
+  DriverSocket({
+    required this.trainId,
+    required this.trainName,
+  });
   IO.Socket socket = IO.io(serverAddress, <String, dynamic>{
     "transports": ["websocket"],
     "autoConnect": false
   });
-  final StreamController<LatLong> socketResponse = StreamController<LatLong>();
+  final StreamController<TrainLocation> socketResponse =
+      StreamController<TrainLocation>();
 
-  void addResponse({required LatLong latLong}) =>
-      socketResponse.sink.add(latLong);
+  void addResponse({required TrainLocation trainLocation}) =>
+      socketResponse.sink.add(trainLocation);
 
-  Stream<LatLong> getResponse() => socketResponse.stream;
+  Stream<TrainLocation> getResponse() => socketResponse.stream;
 
-  Stream<LatLong> sendLocation() async* {
+  Stream<TrainLocation> sendLocation() async* {
     socket.connect();
     LocationServices.locationStream.listen(
       (LocationData currentLocation) {
-        print(currentLocation.latitude);
         addResponse(
-          latLong: LatLong(
-            lat: currentLocation.latitude!,
-            long: currentLocation.longitude!,
-          ),
+          trainLocation: TrainLocation(
+              trainId: trainId,
+              trainName: trainName,
+              latitude: currentLocation.latitude!,
+              longitude: currentLocation.longitude!),
         );
+        TrainLocation trainLocation = TrainLocation(
+            trainId: trainId,
+            trainName: trainName,
+            latitude: currentLocation.latitude!,
+            longitude: currentLocation.longitude!);
         socket.emit(
           "driver",
-          {"lat": currentLocation.latitude, "long": currentLocation.longitude},
+          trainLocation.toMap(),
         );
       },
     );

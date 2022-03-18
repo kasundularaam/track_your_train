@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:track_your_train/data/models/train_location.dart';
 
 import '../data_providers/data_provider.dart';
-import '../models/lat_long.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class UserSocket {

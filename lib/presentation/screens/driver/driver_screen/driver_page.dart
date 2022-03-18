@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sizer/sizer.dart';
+import 'package:track_your_train/data/models/train_location.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../data/models/type_user.dart';
 import '../../../../logic/cubit/send_location_cubit/send_location_cubit.dart';
@@ -31,8 +32,8 @@ class _DriverPageState extends State<DriverPage> {
 
   MapController mapController = MapController();
 
-  double lat = 0;
-  double long = 0;
+  TrainLocation? trainLocation;
+  List<Marker> markers = [];
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,9 @@ class _DriverPageState extends State<DriverPage> {
       body: SafeArea(
         child: Column(
           children: [
+            SizedBox(
+              height: 1.h,
+            ),
             Row(
               children: [
                 SizedBox(
@@ -71,22 +75,28 @@ class _DriverPageState extends State<DriverPage> {
                 ),
               ],
             ),
+            SizedBox(
+              height: 1.h,
+            ),
             Expanded(
               child: BlocListener<SendLocationCubit, SendLocationState>(
                 listener: (context, state) {
                   if (state is SendLocationSending) {
                     setState(() {
-                      lat = state.latLong.lat;
-                      long = state.latLong.long;
+                      trainLocation = state.trainLocation;
+                      markers = state.markers;
                     });
 
-                    mapController.move(latLng.LatLng(lat, long), 15.0);
+                    mapController.move(
+                        latLng.LatLng(
+                            trainLocation!.latitude, trainLocation!.longitude),
+                        15.0);
                   }
                 },
                 child: FlutterMap(
                   mapController: mapController,
                   options: MapOptions(
-                    center: latLng.LatLng(0, 0),
+                    center: latLng.LatLng(6.9271, 79.8612),
                     zoom: 15.0,
                   ),
                   layers: [
@@ -98,13 +108,7 @@ class _DriverPageState extends State<DriverPage> {
                           const Text("© OpenStreetMap contributors"),
                     ),
                     MarkerLayerOptions(
-                      markers: [
-                        Marker(
-                          point: latLng.LatLng(lat, long),
-                          builder: (ctx) =>
-                              Image.asset("assets/images/train.png"),
-                        ),
-                      ],
+                      markers: markers,
                     ),
                   ],
                 ),

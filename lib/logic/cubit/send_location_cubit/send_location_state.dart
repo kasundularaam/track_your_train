@@ -6,23 +6,28 @@ abstract class SendLocationState {}
 class SendLocationInitial extends SendLocationState {}
 
 class SendLocationSending extends SendLocationState {
-  final LatLong latLong;
+  final TrainLocation trainLocation;
+  final List<Marker> markers;
   SendLocationSending({
-    required this.latLong,
+    required this.trainLocation,
+    required this.markers,
   });
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is SendLocationSending && other.latLong == latLong;
+    return other is SendLocationSending &&
+        other.trainLocation == trainLocation &&
+        listEquals(other.markers, markers);
   }
 
   @override
-  int get hashCode => latLong.hashCode;
+  int get hashCode => trainLocation.hashCode ^ markers.hashCode;
 
   @override
-  String toString() => 'SendLocationSending(latLong: $latLong)';
+  String toString() =>
+      'SendLocationSending(trainLocation: $trainLocation, markers: $markers)';
 }
 
 class SendLocationFailed extends SendLocationState {

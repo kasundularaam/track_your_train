@@ -12,14 +12,18 @@ class AllTrainsCubit extends Cubit<AllTrainsState> {
   AllTrainsCubit() : super(AllTrainsInitial());
 
   UserSocket userSocket = UserSocket();
+  List<Marker> markers = [];
+  List<String> trainIds = [];
 
   Future<void> loadTrains() async {
     try {
-      List<String> trainIds = [];
-      List<Marker> markers = [];
+      emit(AllTrainsLoading());
+
       userSocket.getLocation().listen((trainLocation) {
         if (!trainIds.contains(trainLocation.trainId)) {
           Marker marker = Marker(
+            width: 200,
+            height: 200,
             point:
                 latLng.LatLng(trainLocation.latitude, trainLocation.longitude),
             builder: (context) => MarkerView(trainLocation: trainLocation),
@@ -29,6 +33,8 @@ class AllTrainsCubit extends Cubit<AllTrainsState> {
         }
         if (trainIds.contains(trainLocation.trainId)) {
           Marker marker = Marker(
+            width: 200,
+            height: 200,
             point:
                 latLng.LatLng(trainLocation.latitude, trainLocation.longitude),
             builder: (context) => MarkerView(trainLocation: trainLocation),
@@ -36,11 +42,12 @@ class AllTrainsCubit extends Cubit<AllTrainsState> {
           final index = trainIds.indexOf(trainLocation.trainId);
           markers[index] = marker;
         }
-
         emit(AllTrainsLoaded(markers: markers));
       });
     } catch (e) {
       emit(AllTrainsFailed(errorMsg: e.toString()));
     }
   }
+
+  void dispose() => userSocket.dispose();
 }

@@ -9,11 +9,13 @@ class AppUser {
   final String userName;
   final String userEmail;
   final UserType userType;
+  final String trainId;
   AppUser({
     required this.userId,
     required this.userName,
     required this.userEmail,
     required this.userType,
+    required this.trainId,
   });
 
   AppUser copyWith({
@@ -21,12 +23,14 @@ class AppUser {
     String? userName,
     String? userEmail,
     UserType? userType,
+    String? trainId,
   }) {
     return AppUser(
       userId: userId ?? this.userId,
       userName: userName ?? this.userName,
       userEmail: userEmail ?? this.userEmail,
       userType: userType ?? this.userType,
+      trainId: trainId ?? this.trainId,
     );
   }
 
@@ -38,6 +42,7 @@ class AppUser {
       'userName': userName,
       'userEmail': userEmail,
       'userType': typeString,
+      'trainId': trainId,
     };
   }
 
@@ -47,6 +52,7 @@ class AppUser {
       userName: map['userName'] ?? '',
       userEmail: map['userEmail'] ?? '',
       userType: stringToType(map['userType']),
+      trainId: map['trainId'] ?? '',
     );
   }
 
@@ -57,7 +63,7 @@ class AppUser {
 
   @override
   String toString() {
-    return 'AppUser(userId: $userId, userName: $userName, userEmail: $userEmail, userType: $userType)';
+    return 'AppUser(userId: $userId, userName: $userName, userEmail: $userEmail, userType: $userType, trainId: $trainId)';
   }
 
   @override
@@ -68,7 +74,8 @@ class AppUser {
         other.userId == userId &&
         other.userName == userName &&
         other.userEmail == userEmail &&
-        other.userType == userType;
+        other.userType == userType &&
+        other.trainId == trainId;
   }
 
   @override
@@ -76,6 +83,7 @@ class AppUser {
     return userId.hashCode ^
         userName.hashCode ^
         userEmail.hashCode ^
-        userType.hashCode;
+        userType.hashCode ^
+        trainId.hashCode;
   }
 }

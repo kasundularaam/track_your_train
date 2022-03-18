@@ -72,6 +72,16 @@ class FireAuth {
     }
   }
 
+  static Future<AppUser> getUserData() async {
+    try {
+      DocumentSnapshot snapshot = await usersRef.doc(uid).get();
+      Map<String, dynamic> map = snapshot.data() as Map<String, dynamic>;
+      return AppUser.fromMap(map);
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
   static Future<void> signOut() async {
     try {
       auth.signOut();

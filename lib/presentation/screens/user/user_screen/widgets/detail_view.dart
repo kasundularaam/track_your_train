@@ -14,11 +14,14 @@ class DetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(5.w),
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
+          SizedBox(
+            height: 3.h,
+          ),
           Center(
             child: Container(
               width: 15.w,
@@ -153,7 +156,10 @@ class DetailView extends StatelessWidget {
               },
               text: "Track Train",
             ),
-          )
+          ),
+          SizedBox(
+            height: 3.h,
+          ),
         ],
       ),
     );

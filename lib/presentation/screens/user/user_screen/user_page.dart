@@ -28,7 +28,7 @@ class _UserPageState extends State<UserPage> {
   @override
   void dispose() {
     super.dispose();
-    BlocProvider.of<GetLocationCubit>(context).dispose();
+    BlocProvider.of<AllTrainsCubit>(context).dispose();
   }
 
   MapController mapController = MapController();
@@ -53,7 +53,7 @@ class _UserPageState extends State<UserPage> {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<GetLocationCubit>(context).getLocation();
+    BlocProvider.of<AllTrainsCubit>(context).loadTrains();
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -100,7 +100,7 @@ class _UserPageState extends State<UserPage> {
                 child: FlutterMap(
                   mapController: mapController,
                   options: MapOptions(
-                    center: latLng.LatLng(0, 0),
+                    center: latLng.LatLng(6.9271, 79.8612),
                     zoom: 15.0,
                   ),
                   layers: [

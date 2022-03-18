@@ -38,6 +38,7 @@ class RegisterCubit extends Cubit<RegisterState> {
             userName: name,
             userEmail: email,
             userType: UserType.user,
+            trainId: "null",
           ),
         );
         await SharedAuth.clearData();
