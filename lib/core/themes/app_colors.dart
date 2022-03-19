@@ -5,6 +5,6 @@ class AppColors {
   static const Color darkElv0 = Color(0xFF000000);
   static const Color darkElv1 = Color(0xFF7F7F7F);
   static const Color lightElv0 = Color(0xFFFFFFFF);
-  static const Color lightElv1 = Color(0xFFCCCCCC);
-  // static const Color landingScreenTop = Color(0xFF00AEAE);
+  static const Color lightElv1 = Color(0xFFEEEEEE);
+  static const Color lightElv2 = Color(0xFFCCCCCC);
 }

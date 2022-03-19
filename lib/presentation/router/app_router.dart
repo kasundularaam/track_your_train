@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track_your_train/logic/cubit/all_trains_cubit/all_trains_cubit.dart';
-import 'package:track_your_train/logic/cubit/sign_out_cubit/sign_out_cubit.dart';
+import 'package:track_your_train/logic/cubit/search_trains_cubit/search_trains_cubit.dart';
+import 'package:track_your_train/presentation/screens/user/search_screen/search_page.dart';
 
 import '../../core/exceptions/route_exception.dart';
 import '../../data/models/type_user.dart';
-import '../../logic/cubit/get_location_cubit/get_location_cubit.dart';
 import '../../logic/cubit/landing_screen_cubit/landing_screen_cubit.dart';
 import '../../logic/cubit/login_cubit/login_cubit.dart';
 import '../../logic/cubit/register_cubit/register_cubit.dart';
@@ -24,6 +24,7 @@ class AppRouter {
   static const String ticketCheckerPage = '/ticketCheckerPage';
   static const String loginPage = '/loginPage';
   static const String signInPage = '/signInPage';
+  static const String searchPage = '/searchPage';
 
   const AppRouter._();
 
@@ -86,6 +87,17 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => RegisterCubit(),
             child: const SignInPage(),
+          ),
+        );
+      case searchPage:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => SearchTrainsCubit(),
+              ),
+            ],
+            child: const SearchPage(),
           ),
         );
       default:

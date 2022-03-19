@@ -28,7 +28,7 @@ class DetailView extends StatelessWidget {
               height: 1.2.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(1.h),
-                color: AppColors.lightElv1,
+                color: AppColors.lightElv2,
               ),
             ),
           ),
