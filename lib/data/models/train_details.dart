@@ -55,30 +55,30 @@ class TrainDetails {
   Map<String, dynamic> toMap() {
     return {
       'titleText': titleText,
-      'startStation': startStation,
-      'departureTime': departureTime,
-      'endStation': endStation,
-      'trainType': trainType,
-      'trainName': trainName,
-      'trainNumber': trainNumber,
-      'runby': runby,
-      'availableClasses': availableClasses,
-      'directtrain': directtrain,
+      'StartStation': startStation,
+      'DepartureTime': departureTime,
+      'EndStation': endStation,
+      'TrainType': trainType,
+      'TrainName': trainName,
+      'TrainNumber': trainNumber,
+      'Runby': runby,
+      'AvailableClasses': availableClasses,
+      'Directtrain': directtrain,
     };
   }
 
   factory TrainDetails.fromMap(Map<String, dynamic> map) {
     return TrainDetails(
       titleText: map['titleText'] ?? '',
-      startStation: map['startStation'] ?? '',
-      departureTime: map['departureTime'] ?? '',
-      endStation: map['endStation'] ?? '',
-      trainType: map['trainType'] ?? '',
-      trainName: map['trainName'] ?? '',
-      trainNumber: map['trainNumber'] ?? '',
-      runby: map['runby'] ?? '',
-      availableClasses: List<String>.from(map['availableClasses']),
-      directtrain: map['directtrain'] ?? '',
+      startStation: map['StartStation'] ?? '',
+      departureTime: map['DepartureTime'] ?? '',
+      endStation: map['EndStation'] ?? '',
+      trainType: map['TrainType'] ?? '',
+      trainName: map['TrainName'] ?? '',
+      trainNumber: map['TrainNumber'] ?? '',
+      runby: map['Runby'] ?? '',
+      availableClasses: List<String>.from(map['AvailableClasses']),
+      directtrain: map['Directtrain'] ?? '',
     );
   }
 

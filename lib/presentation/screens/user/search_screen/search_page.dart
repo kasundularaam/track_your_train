@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:track_your_train/data/models/train_details.dart';
 import 'package:track_your_train/logic/cubit/search_trains_cubit/search_trains_cubit.dart';
+import 'package:track_your_train/presentation/screens/user/search_screen/widget/result_card.dart';
 import 'package:track_your_train/presentation/screens/user/search_screen/widget/search_box.dart';
 
 import '../../../../core/themes/app_colors.dart';
@@ -114,30 +115,22 @@ class _SearchPageState extends State<SearchPage> {
                   }
 
                   if (state is SearchTrainsResults) {
-                    return ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: state.trainDetailsList.length,
-                        itemBuilder: (context, index) {
-                          final TrainDetails trainDetails =
-                              state.trainDetailsList[index];
-                          return InkWell(
-                            splashColor:
-                                AppColors.primaryColor.withOpacity(0.1),
-                            onTap: () {},
-                            child: Container(
-                              color: AppColors.lightElv0,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 5.w, vertical: 2.h),
-                              child: Text(
-                                trainDetails.trainName,
-                                style: TextStyle(
-                                  color: AppColors.darkElv0,
-                                  fontSize: 14.sp,
-                                ),
-                              ),
-                            ),
-                          );
-                        });
+                    return ListView(
+                      physics: const BouncingScrollPhysics(),
+                      children: [
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: state.trainDetailsList.length,
+                          shrinkWrap: true,
+                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          itemBuilder: (context, index) => ResultCard(
+                              trainDetails: state.trainDetailsList[index]),
+                        ),
+                      ],
+                    );
                   }
                   if (state is SearchTrainsSuggestions) {
                     return ListView.builder(

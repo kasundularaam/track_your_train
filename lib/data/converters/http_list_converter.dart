@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:track_your_train/data/models/train_details.dart';
 
@@ -15,11 +16,15 @@ class HttpListConverter {
   }
 
   static List<TrainDetails> parseTrains(String responseBody) {
-    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
-    return parsed
-        .map<TrainDetails>(
-          (json) => TrainDetails.fromMap(json),
-        )
-        .toList();
+    List<TrainDetails> list = [];
+    List<Map<String, dynamic>> parsed =
+        json.decode(responseBody).cast<Map<String, dynamic>>();
+
+    for (var item in parsed) {
+      if (item.length >= 10) {
+        list.add(TrainDetails.fromMap(item));
+      }
+    }
+    return list;
   }
 }

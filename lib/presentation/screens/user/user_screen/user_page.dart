@@ -88,7 +88,7 @@ class _UserPageState extends State<UserPage> {
                           Icon(
                             Icons.search_rounded,
                             color: AppColors.primaryColor,
-                            size: 24.sp,
+                            size: 22.sp,
                           ),
                         ],
                       ),

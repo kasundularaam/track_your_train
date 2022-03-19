@@ -40,7 +40,6 @@ class SearchTrainsCubit extends Cubit<SearchTrainsState> {
       emit(SearchTrainsLoading());
       List<TrainDetails> results =
           await HTTPServices.getTrainDetails(start: start, end: end);
-      print(results);
       if (results.isNotEmpty) {
         emit(SearchTrainsResults(trainDetailsList: results));
       } else {

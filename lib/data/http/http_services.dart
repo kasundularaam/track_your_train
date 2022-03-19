@@ -40,7 +40,6 @@ class HTTPServices {
         ),
       );
       if (response.statusCode == 200) {
-        log(response.body);
         return HttpListConverter.parseTrains(response.body);
       } else {
         throw Failure(message: '${response.statusCode}');
