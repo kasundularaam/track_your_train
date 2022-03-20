@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:track_your_train/data/converters/user_type_converter.dart';
 import 'package:track_your_train/data/shared/shared_keys.dart';

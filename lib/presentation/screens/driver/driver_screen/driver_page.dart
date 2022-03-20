@@ -1,9 +1,7 @@
-import "package:latlong2/latlong.dart" as latLng;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:sizer/sizer.dart';
-import 'package:track_your_train/data/models/train_location.dart';
+import 'package:track_your_train/presentation/screens/driver/driver_screen/widget/driver_map.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../data/models/type_user.dart';
 import '../../../../logic/cubit/send_location_cubit/send_location_cubit.dart';
@@ -29,11 +27,6 @@ class _DriverPageState extends State<DriverPage> {
     super.dispose();
     BlocProvider.of<SendLocationCubit>(context).dispose();
   }
-
-  MapController mapController = MapController();
-
-  TrainLocation? trainLocation;
-  List<Marker> markers = [];
 
   @override
   Widget build(BuildContext context) {
@@ -78,41 +71,8 @@ class _DriverPageState extends State<DriverPage> {
             SizedBox(
               height: 1.h,
             ),
-            Expanded(
-              child: BlocListener<SendLocationCubit, SendLocationState>(
-                listener: (context, state) {
-                  if (state is SendLocationSending) {
-                    setState(() {
-                      trainLocation = state.trainLocation;
-                      markers = state.markers;
-                    });
-
-                    mapController.move(
-                        latLng.LatLng(
-                            trainLocation!.latitude, trainLocation!.longitude),
-                        15.0);
-                  }
-                },
-                child: FlutterMap(
-                  mapController: mapController,
-                  options: MapOptions(
-                    center: latLng.LatLng(6.9271, 79.8612),
-                    zoom: 15.0,
-                  ),
-                  layers: [
-                    TileLayerOptions(
-                      urlTemplate:
-                          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                      subdomains: ['a', 'b', 'c'],
-                      attributionBuilder: (_) =>
-                          const Text("© OpenStreetMap contributors"),
-                    ),
-                    MarkerLayerOptions(
-                      markers: markers,
-                    ),
-                  ],
-                ),
-              ),
+            const Expanded(
+              child: DriverMap(),
             ),
           ],
         ),

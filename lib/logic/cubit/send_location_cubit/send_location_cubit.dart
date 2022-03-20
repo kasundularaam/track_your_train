@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -29,10 +27,11 @@ class SendLocationCubit extends Cubit<SendLocationState> {
 
       if (isPermissionAllowed) {
         AppUser appUser = await FireAuth.getUserData();
-        print(appUser);
         driverSocket =
             DriverSocket(trainId: appUser.trainId, trainName: appUser.userName);
         driverSocket!.sendLocation().listen((trainLocation) {
+          // log(trainLocation.toString());
+          // log(markers.length.toString());
           emit(
             SendLocationSending(trainLocation: trainLocation, markers: markers),
           );

@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:track_your_train/data/models/train_details.dart';
 import 'package:track_your_train/logic/cubit/search_trains_cubit/search_trains_cubit.dart';
 import 'package:track_your_train/presentation/screens/user/search_screen/widget/result_card.dart';
 import 'package:track_your_train/presentation/screens/user/search_screen/widget/search_box.dart';

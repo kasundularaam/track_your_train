@@ -12,19 +12,6 @@ class AllTrainsLoaded extends AllTrainsState {
   AllTrainsLoaded({
     required this.markers,
   });
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is AllTrainsLoaded && listEquals(other.markers, markers);
-  }
-
-  @override
-  int get hashCode => markers.hashCode;
-
-  @override
-  String toString() => 'AllTrainsLoaded(markers: $markers)';
 }
 
 class AllTrainsFailed extends AllTrainsState {

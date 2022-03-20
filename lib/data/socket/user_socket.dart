@@ -6,7 +6,7 @@ import '../data_providers/data_provider.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class UserSocket {
-  IO.Socket socket = IO.io(serverAddress, <String, dynamic>{
+  IO.Socket socket = IO.io(socketAddress, <String, dynamic>{
     "transports": ["websocket"],
     "autoConnect": false
   });

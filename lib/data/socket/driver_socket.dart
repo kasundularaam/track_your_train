@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:location/location.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -16,7 +15,7 @@ class DriverSocket {
     required this.trainId,
     required this.trainName,
   });
-  IO.Socket socket = IO.io(serverAddress, <String, dynamic>{
+  IO.Socket socket = IO.io(socketAddress, <String, dynamic>{
     "transports": ["websocket"],
     "autoConnect": false
   });
