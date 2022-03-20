@@ -44,16 +44,19 @@ class MarkerView extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () => showModalBottomSheet(
-                context: context,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(5.w),
-                  ),
+              context: context,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(5.w),
                 ),
-                backgroundColor: AppColors.lightElv0,
-                isScrollControlled: true,
-                builder: (sheetContext) =>
-                    DetailView(sheetContext: sheetContext)),
+              ),
+              backgroundColor: AppColors.lightElv0,
+              isScrollControlled: true,
+              builder: (sheetContext) => DetailView(
+                sheetContext: sheetContext,
+                trainLocation: trainLocation,
+              ),
+            ),
             child: Image.asset(
               "assets/images/train.png",
               width: 10.w,

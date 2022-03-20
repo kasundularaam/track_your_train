@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
+
+import 'package:track_your_train/data/models/train_location.dart';
 
 import '../../../../../core/themes/app_colors.dart';
 import '../../../auth/widgets/auth_button.dart';
-import 'package:sizer/sizer.dart';
 
 class DetailView extends StatelessWidget {
   final BuildContext sheetContext;
+  final TrainLocation trainLocation;
   const DetailView({
     Key? key,
     required this.sheetContext,
+    required this.trainLocation,
   }) : super(key: key);
 
   @override
@@ -38,11 +42,11 @@ class DetailView extends StatelessWidget {
           Center(
             child: Wrap(children: [
               Text(
-                "COLOMBO FORT to KANDY",
+                trainLocation.trainName,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  color: AppColors.darkElv0,
+                  color: AppColors.primaryColor,
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
                 ),
@@ -53,112 +57,27 @@ class DetailView extends StatelessWidget {
             height: 2.h,
           ),
           Center(
-            child: Text(
-              "PODI MENIKE - EXPRESS TRAIN BADULLA",
-              style: TextStyle(
-                  color: AppColors.primaryColor,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          SizedBox(
-            height: 2.h,
-          ),
-          Text(
-            "Start Station : COLOMBO FORT",
-            style: TextStyle(
-              color: AppColors.darkElv1,
-              fontSize: 14.sp,
-            ),
-          ),
-          SizedBox(
-            height: 2.h,
-          ),
-          Text(
-            "Departure Time : 05:55:00",
-            style: TextStyle(
-              color: AppColors.darkElv1,
-              fontSize: 14.sp,
-            ),
-          ),
-          SizedBox(
-            height: 2.h,
-          ),
-          Text(
-            "Arrival to KANDY	: 08:42:00",
-            style: TextStyle(
-              color: AppColors.darkElv1,
-              fontSize: 14.sp,
-            ),
-          ),
-          SizedBox(
-            height: 2.h,
-          ),
-          Text(
-            "Distance : 120.7KM",
-            style: TextStyle(
-              color: AppColors.darkElv1,
-              fontSize: 14.sp,
-            ),
-          ),
-          SizedBox(
-            height: 2.h,
-          ),
-          Text(
-            "Available Classes",
-            style: TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 2.h,
-          ),
-          Wrap(
-            spacing: 2.w,
-            children: const [
-              Chip(
-                backgroundColor: AppColors.primaryColor,
-                label: Text(
-                  "1st Class",
+            child: RichText(
+              text: TextSpan(children: [
+                TextSpan(
+                  text: "Train No: ",
                   style: TextStyle(
-                    color: AppColors.lightElv0,
-                  ),
+                      color: AppColors.darkElv1,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400),
                 ),
-              ),
-              Chip(
-                backgroundColor: AppColors.primaryColor,
-                label: Text(
-                  "2nd Class",
+                TextSpan(
+                  text: trainLocation.trainId,
                   style: TextStyle(
-                    color: AppColors.lightElv0,
-                  ),
-                ),
-              ),
-              Chip(
-                backgroundColor: AppColors.primaryColor,
-                label: Text(
-                  "3rd Class",
-                  style: TextStyle(
-                    color: AppColors.lightElv0,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 3.h,
-          ),
-          Center(
-            child: AuthButton(
-              onPress: () {
-                Navigator.pop(sheetContext);
-              },
-              text: "Track Train",
+                      color: AppColors.darkElv0,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold),
+                )
+              ]),
             ),
           ),
           SizedBox(
-            height: 3.h,
+            height: 2.h,
           ),
         ],
       ),

@@ -6,10 +6,12 @@ import '../../../../../core/themes/app_colors.dart';
 class SearchBox extends StatelessWidget {
   final TextEditingController searchController;
   final String hintText;
+  final Function(String) onChanged;
   const SearchBox({
     Key? key,
     required this.searchController,
     required this.hintText,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -21,6 +23,7 @@ class SearchBox extends StatelessWidget {
       child: TextField(
         controller: searchController,
         keyboardType: TextInputType.streetAddress,
+        onChanged: (text) => onChanged(text),
         style: TextStyle(
           fontSize: 14.sp,
           color: AppColors.darkElv0,

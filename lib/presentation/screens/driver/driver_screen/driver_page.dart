@@ -44,12 +44,25 @@ class _DriverPageState extends State<DriverPage> {
                   width: 5.w,
                 ),
                 Expanded(
-                  child: Text(
-                    "On The Way",
-                    style: TextStyle(
-                        color: AppColors.primaryColor,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold),
+                  child: BlocBuilder<SendLocationCubit, SendLocationState>(
+                    builder: (context, state) {
+                      if (state is SendLocationSending) {
+                        return Text(
+                          state.trainLocation.trainName,
+                          style: TextStyle(
+                              color: AppColors.primaryColor,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.bold),
+                        );
+                      }
+                      return Text(
+                        "On The Way",
+                        style: TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold),
+                      );
+                    },
                   ),
                 ),
                 TextButton(

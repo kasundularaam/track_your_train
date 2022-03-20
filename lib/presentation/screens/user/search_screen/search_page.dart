@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:track_your_train/logic/cubit/search_trains_cubit/search_trains_cubit.dart';
-import 'package:track_your_train/presentation/screens/user/search_screen/widget/result_card.dart';
-import 'package:track_your_train/presentation/screens/user/search_screen/widget/search_box.dart';
 
 import '../../../../core/themes/app_colors.dart';
 import '../../../../data/models/station.dart';
+import '../../../../logic/cubit/search_trains_cubit/search_trains_cubit.dart';
+import 'widget/result_card.dart';
+import 'widget/search_box.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -23,18 +23,10 @@ class _SearchPageState extends State<SearchPage> {
   String endStation = "";
 
   @override
-  void initState() {
-    startController.addListener(() {
-      String start = startController.text;
-      BlocProvider.of<SearchTrainsCubit>(context)
-          .showSuggestions(searchText: start, isStart: true);
-    });
-    endController.addListener(() {
-      String end = endController.text;
-      BlocProvider.of<SearchTrainsCubit>(context)
-          .showSuggestions(searchText: end, isStart: false);
-    });
-    super.initState();
+  void dispose() {
+    startController.dispose();
+    endController.dispose();
+    super.dispose();
   }
 
   @override
@@ -59,6 +51,10 @@ class _SearchPageState extends State<SearchPage> {
                         SearchBox(
                           searchController: startController,
                           hintText: "Start",
+                          onChanged: (startText) =>
+                              BlocProvider.of<SearchTrainsCubit>(context)
+                                  .showSuggestions(
+                                      searchText: startText, isStart: true),
                         ),
                         SizedBox(
                           height: 1.h,
@@ -66,6 +62,10 @@ class _SearchPageState extends State<SearchPage> {
                         SearchBox(
                           searchController: endController,
                           hintText: "End",
+                          onChanged: (endText) =>
+                              BlocProvider.of<SearchTrainsCubit>(context)
+                                  .showSuggestions(
+                                      searchText: endText, isStart: false),
                         ),
                       ],
                     ),
@@ -122,7 +122,7 @@ class _SearchPageState extends State<SearchPage> {
                           physics: const BouncingScrollPhysics(),
                           itemCount: state.trainDetailsList.length,
                           shrinkWrap: true,
-                          padding: EdgeInsets.symmetric(horizontal: 5.w),
+                          padding: EdgeInsets.symmetric(horizontal: 3.w),
                           itemBuilder: (context, index) => ResultCard(
                               trainDetails: state.trainDetailsList[index]),
                         ),
