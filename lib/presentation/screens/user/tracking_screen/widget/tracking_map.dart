@@ -21,7 +21,7 @@ class _TrackingMapState extends State<TrackingMap> {
   String get trainId => widget.trainId;
   MapController mapController = MapController();
   TrainLocation? trainLocation;
-  Marker? marker;
+  List<Marker> markers = [];
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<TrackingMapCubit>(context).trackTrain(trainId: trainId);
@@ -30,7 +30,7 @@ class _TrackingMapState extends State<TrackingMap> {
         if (state is TrackingMapTracking) {
           setState(() {
             trainLocation = state.trainLocation;
-            marker = state.marker;
+            markers[0] = state.marker;
           });
           mapController.move(
               latLng.LatLng(trainLocation!.latitude, trainLocation!.longitude),
@@ -51,7 +51,7 @@ class _TrackingMapState extends State<TrackingMap> {
                 const Text("© OpenStreetMap contributors"),
           ),
           MarkerLayerOptions(
-            markers: [marker!],
+            markers: markers,
           ),
         ],
       ),
