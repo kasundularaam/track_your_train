@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:track_your_train/core/themes/app_colors.dart';
 import 'package:track_your_train/logic/cubit/tracking_map_cubit/tracking_map_cubit.dart';
+import 'package:track_your_train/presentation/router/app_router.dart';
 import 'package:track_your_train/presentation/screens/user/tracking_screen/widget/tracking_map.dart';
 
 import '../../../../data/converters/string_formatter.dart';
@@ -24,6 +25,14 @@ class _TrackingPageState extends State<TrackingPage> {
   String get trainName => trainDetails.trainName == ""
       ? "${trainDetails.trainNumber} ${trainDetails.startStation} to ${trainDetails.endStation}"
       : trainDetails.trainName.replaceAll(RegExp(r"\s+"), " ");
+
+  bool get noBooking {
+    if (trainDetails.availableClasses.contains("1st Class")) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -333,17 +342,26 @@ class _TrackingPageState extends State<TrackingPage> {
                     height: 2.h,
                   ),
                   Center(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Book Now',
-                        style: TextStyle(fontSize: 18.sp),
+                    child: IgnorePointer(
+                      ignoring: !noBooking,
+                      child: ElevatedButton(
+                        onPressed: () => Navigator.pushNamed(
+                          context,
+                          AppRouter.bookTrainPage,
+                          arguments: trainDetails,
+                        ),
+                        child: Text(
+                          'Book Now',
+                          style: TextStyle(fontSize: 18.sp),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.w, vertical: 1.5.h),
+                            shape: const StadiumBorder(),
+                            primary: noBooking
+                                ? AppColors.primaryColor
+                                : AppColors.darkElv1),
                       ),
-                      style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.w, vertical: 1.5.h),
-                          shape: const StadiumBorder(),
-                          primary: AppColors.primaryColor),
                     ),
                   ),
                   SizedBox(

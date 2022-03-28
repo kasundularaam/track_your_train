@@ -74,9 +74,10 @@ class _DriverPageState extends State<DriverPage> {
                           child: const SignOutWindow(),
                         );
                       }),
-                  child: const Icon(
-                    Icons.menu_rounded,
+                  child: Icon(
+                    Icons.more_vert_rounded,
                     color: AppColors.primaryColor,
+                    size: 26.sp,
                   ),
                 ),
               ],

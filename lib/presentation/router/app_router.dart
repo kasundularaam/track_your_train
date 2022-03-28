@@ -16,6 +16,7 @@ import '../screens/auth/login_screen/login_page.dart';
 import '../screens/auth/signup_screen/signup_page.dart';
 import '../screens/driver/driver_screen/driver_page.dart';
 import '../screens/ticket_checker/ticket_checker_screen/ticket_checker_page.dart';
+import '../screens/user/book_train_screen/book_train_page.dart';
 import '../screens/user/search_screen/search_page.dart';
 import '../screens/user/user_screen/user_page.dart';
 
@@ -28,6 +29,7 @@ class AppRouter {
   static const String signInPage = '/signInPage';
   static const String searchPage = '/searchPage';
   static const String trackingPage = '/trackingPage';
+  static const String bookTrainPage = '/bookTrainPage';
 
   const AppRouter._();
 
@@ -113,6 +115,18 @@ class AppRouter {
               ),
             ],
             child: TrackingPage(trainDetails: trainDetails),
+          ),
+        );
+      case bookTrainPage:
+        TrainDetails trainDetails = settings.arguments as TrainDetails;
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => SearchTrainsCubit(),
+              ),
+            ],
+            child: BookTrainPage(trainDetails: trainDetails),
           ),
         );
       default:
