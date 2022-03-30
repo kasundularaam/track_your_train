@@ -7,7 +7,6 @@ import 'package:sizer/sizer.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../logic/cubit/login_cubit/login_cubit.dart';
 import '../../../router/app_router.dart';
-import '../widgets/auth_button.dart';
 import '../widgets/auth_text_input.dart';
 
 class LoginPage extends StatefulWidget {
@@ -121,9 +120,18 @@ class _LoginPageState extends State<LoginPage> {
                         color: AppColors.primaryColor,
                       );
                     } else {
-                      return AuthButton(
-                        text: "LOGIN",
-                        onPress: () => login(),
+                      return ElevatedButton(
+                        onPressed: () => login(),
+                        child: Text(
+                          'LOG IN',
+                          style: TextStyle(fontSize: 18.sp),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 1.5.h),
+                          shape: const StadiumBorder(),
+                          primary: AppColors.primaryColor,
+                        ),
                       );
                     }
                   },

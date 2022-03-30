@@ -7,7 +7,6 @@ import 'package:track_your_train/logic/cubit/register_cubit/register_cubit.dart'
 
 import '../../../../core/themes/app_colors.dart';
 import '../../../router/app_router.dart';
-import '../widgets/auth_button.dart';
 import '../widgets/auth_text_input.dart';
 
 class SignInPage extends StatefulWidget {
@@ -161,9 +160,18 @@ class _SignInPageState extends State<SignInPage> {
                         color: AppColors.primaryColor,
                       );
                     } else {
-                      return AuthButton(
-                        text: "SIGN IN",
-                        onPress: () => register(),
+                      return ElevatedButton(
+                        onPressed: () => register(),
+                        child: Text(
+                          'SIGN UP',
+                          style: TextStyle(fontSize: 18.sp),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 1.5.h),
+                          shape: const StadiumBorder(),
+                          primary: AppColors.primaryColor,
+                        ),
                       );
                     }
                   },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track_your_train/data/models/train_details.dart';
+import 'package:track_your_train/logic/cubit/booking_cubit/booking_cubit.dart';
 import 'package:track_your_train/presentation/screens/user/tracking_screen/tracking_page.dart';
 
 import '../../core/exceptions/route_exception.dart';
@@ -123,7 +124,7 @@ class AppRouter {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => SearchTrainsCubit(),
+                create: (context) => BookingCubit(),
               ),
             ],
             child: BookTrainPage(trainDetails: trainDetails),

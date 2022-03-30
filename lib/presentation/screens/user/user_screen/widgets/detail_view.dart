@@ -4,7 +4,6 @@ import 'package:sizer/sizer.dart';
 import 'package:track_your_train/data/models/train_location.dart';
 
 import '../../../../../core/themes/app_colors.dart';
-import '../../../auth/widgets/auth_button.dart';
 
 class DetailView extends StatelessWidget {
   final BuildContext sheetContext;
