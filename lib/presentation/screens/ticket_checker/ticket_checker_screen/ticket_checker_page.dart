@@ -4,13 +4,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:sizer/sizer.dart';
+import 'package:track_your_train/logic/cubit/check_tickets_cubit/check_tickets_cubit.dart';
 
+import '../../../../core/components/components.dart';
+import '../../../../core/constants/strings.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../data/models/type_user.dart';
 import '../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
 import '../../widgets/sign_out_window.dart';
+import 'widgets/scan_qr.dart';
 
 class TicketCheckerPage extends StatefulWidget {
   final TypeUser typeUser;
@@ -24,34 +27,6 @@ class TicketCheckerPage extends StatefulWidget {
 }
 
 class _TicketCheckerPageState extends State<TicketCheckerPage> {
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  Barcode? result;
-  QRViewController? controller;
-  TypeUser get typeUser => widget.typeUser;
-
-  @override
-  void reassemble() {
-    super.reassemble();
-    if (Platform.isAndroid) {
-      controller!.pauseCamera();
-    } else if (Platform.isIOS) {
-      controller!.resumeCamera();
-    }
-  }
-
-  void onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
-      log(scanData.code!);
-    });
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -95,48 +70,87 @@ class _TicketCheckerPageState extends State<TicketCheckerPage> {
                 ],
               ),
               Expanded(
-                child: Stack(
+                  child: Container(
+                color: AppColors.lightElv0,
+                child: Column(
                   children: [
-                    QRView(
-                      key: qrKey,
-                      onQRViewCreated: onQRViewCreated,
+                    vSpacer(3),
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(5.w),
+                        child: Image.asset(Strings.scannerImg)),
+                    vSpacer(2),
+                    const ScanQR(),
+                    vSpacer(3),
+                    BlocBuilder<CheckTicketsCubit, CheckTicketsState>(
+                      builder: (context, state) {
+                        if (state is CheckTicketsValid) {
+                          return Card(
+                            color: Colors.green,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 5.w,
+                                vertical: 2.h,
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.check_circle_outline_rounded,
+                                    color: AppColors.lightElv0,
+                                    size: 22.sp,
+                                  ),
+                                  hSpacer(3),
+                                  Expanded(
+                                      child: textL("Ticket accepted", 14,
+                                          bold: true)),
+                                  buttonText(
+                                      "OK",
+                                      () => BlocProvider.of<CheckTicketsCubit>(
+                                              context)
+                                          .initial(),
+                                      AppColors.lightElv0)
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+                        if (state is CheckTicketsInvalid) {
+                          return Card(
+                            color: Colors.red,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 5.w,
+                                vertical: 2.h,
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.check_circle_outline_rounded,
+                                    color: AppColors.lightElv0,
+                                    size: 22.sp,
+                                  ),
+                                  hSpacer(3),
+                                  Expanded(
+                                    child: textL(
+                                        "Can not accept this ticket", 14,
+                                        bold: true),
+                                  ),
+                                  buttonText(
+                                      "OK",
+                                      () => BlocProvider.of<CheckTicketsCubit>(
+                                              context)
+                                          .initial(),
+                                      AppColors.lightElv0)
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+                        return nothing;
+                      },
                     ),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        margin: EdgeInsets.only(top: 3.h),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 1.h),
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryColor.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(2.w),
-                        ),
-                        child: Text(
-                          "Place QR code inside the area\nScanning will start automatically",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: AppColors.lightElv0.withOpacity(0.9),
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Container(
-                        width: 70.w,
-                        height: 70.w,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 1.w,
-                            color: AppColors.primaryColor,
-                          ),
-                          borderRadius: BorderRadius.circular(5.w),
-                        ),
-                      ),
-                    )
                   ],
                 ),
-              ),
+              )),
             ],
           ),
         ),

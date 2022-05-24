@@ -4,6 +4,7 @@ class LocationServices {
   static Location location = Location();
 
   static Stream<LocationData> get locationStream => location.onLocationChanged;
+  static Future<LocationData> get locationData => location.getLocation();
 
   static Future<bool> isPermissionAllowed() async {
     bool _serviceEnabled;

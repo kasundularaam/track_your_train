@@ -4,5 +4,6 @@ class Strings {
 
   // HomeScreen
   static const homeScreenTitle = 'Home Screen';
-  static const homeScreenCenterText = 'Badu Wada Brooo';
+
+  static const scannerImg = 'assets/images/scanner.gif';
 }

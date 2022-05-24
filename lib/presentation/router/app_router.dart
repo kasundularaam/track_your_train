@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:track_your_train/data/models/train_details.dart';
-import 'package:track_your_train/logic/cubit/booking_cubit/booking_cubit.dart';
-import 'package:track_your_train/presentation/screens/user/tracking_screen/tracking_page.dart';
+import 'package:track_your_train/logic/cubit/check_tickets_cubit/check_tickets_cubit.dart';
 
 import '../../core/exceptions/route_exception.dart';
+import '../../data/models/train_details.dart';
 import '../../data/models/type_user.dart';
 import '../../logic/cubit/all_trains_cubit/all_trains_cubit.dart';
+import '../../logic/cubit/booking_cubit/booking_cubit.dart';
 import '../../logic/cubit/landing_screen_cubit/landing_screen_cubit.dart';
 import '../../logic/cubit/login_cubit/login_cubit.dart';
 import '../../logic/cubit/register_cubit/register_cubit.dart';
@@ -19,6 +19,7 @@ import '../screens/driver/driver_screen/driver_page.dart';
 import '../screens/ticket_checker/ticket_checker_screen/ticket_checker_page.dart';
 import '../screens/user/book_train_screen/book_train_page.dart';
 import '../screens/user/search_screen/search_page.dart';
+import '../screens/user/tracking_screen/tracking_page.dart';
 import '../screens/user/user_screen/user_page.dart';
 
 class AppRouter {
@@ -67,8 +68,8 @@ class AppRouter {
       case ticketCheckerPage:
         TypeUser typeUser = settings.arguments as TypeUser;
         return MaterialPageRoute(
-          builder: (_) => MultiBlocProvider(
-            providers: [],
+          builder: (_) => BlocProvider(
+            create: (context) => CheckTicketsCubit(),
             child: TicketCheckerPage(
               typeUser: typeUser,
             ),
