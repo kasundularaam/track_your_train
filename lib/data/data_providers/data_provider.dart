@@ -1,12 +1,14 @@
 class DataProvider {
   static String trainSearchUrl({required String start, required String end}) =>
-      "$endPointAddress/user/trains?start=$start&end=$end";
+      "$url/user/trains?start=$start&end=$end";
 
-  static String stationsUrl() => "$endPointAddress/user/stations";
+  static String stationsUrl() => "$url/user/stations";
   static String trainDetails({required String trainId}) =>
-      "$endPointAddress/user/trains?id=$trainId";
+      "$url/user/trains?id=$trainId";
 }
 
-const String endPointAddress = "http://3.108.41.163:8001";
+const String url =
+    "http://ec2-13-233-184-58.ap-south-1.compute.amazonaws.com:8001";
 
-const String socketAddress = "http://3.108.41.163:3000";
+const String socketAddress =
+    "http://ec2-13-233-184-58.ap-south-1.compute.amazonaws.com:3000";

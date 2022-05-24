@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:track_your_train/data/converters/http_list_converter.dart';
@@ -18,6 +19,7 @@ class HTTPServices {
           DataProvider.stationsUrl(),
         ),
       );
+      log(response.body);
       if (response.statusCode == 200) {
         return HttpListConverter.parseStations(response.body);
       } else {
@@ -38,6 +40,7 @@ class HTTPServices {
           DataProvider.trainSearchUrl(start: start, end: end),
         ),
       );
+      log(response.body);
       if (response.statusCode == 200) {
         return HttpListConverter.parseTrains(response.body);
       } else {
