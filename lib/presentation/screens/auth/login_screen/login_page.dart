@@ -7,7 +7,6 @@ import 'package:track_your_train/core/components/components.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../logic/cubit/login_cubit/login_cubit.dart';
 import '../../../router/app_router.dart';
-import '../widgets/auth_text_input.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
