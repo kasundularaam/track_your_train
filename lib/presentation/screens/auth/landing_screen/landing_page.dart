@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+import 'package:track_your_train/core/components/components.dart';
 
 import '../../../../core/enums/user_type.dart';
 import '../../../../core/themes/app_colors.dart';
@@ -68,8 +69,7 @@ class _LandingPageState extends State<LandingPage> {
                       (route) => false,
                     );
                   } else if (state is LandingScreenFailed) {
-                    SnackBar snackBar = SnackBar(content: Text(state.errorMsg));
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    showSnackBar(context, state.errorMsg);
                   }
                 },
                 builder: (context, state) {

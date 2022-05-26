@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:track_your_train/data/converters/user_type_converter.dart';
-
 import '../../core/enums/user_type.dart';
+import '../converters/user_type_converter.dart';
 
 class AppUser {
   final String userId;

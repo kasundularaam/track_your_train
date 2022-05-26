@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:track_your_train/data/http/http_services.dart';
-import 'package:track_your_train/data/http/search_trains/search_suggestions.dart';
-import 'package:track_your_train/data/models/station.dart';
-import 'package:track_your_train/data/models/train_details.dart';
+
+import '../../../data/http/http_services.dart';
+import '../../../data/http/search_trains/search_suggestions.dart';
+import '../../../data/models/station.dart';
+import '../../../data/models/train_details.dart';
 
 part 'search_trains_state.dart';
 

@@ -1,15 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:track_your_train/data/converters/http_list_converter.dart';
-import 'package:track_your_train/data/models/train_details.dart';
-
 import '../../core/exceptions/route_exception.dart';
+import '../converters/http_list_converter.dart';
 import '../data_providers/data_provider.dart';
 
 import 'package:http/http.dart' as http;
 
 import '../models/station.dart';
+import '../models/train_details.dart';
 
 class HTTPServices {
   static Future<List<Station>> getStations() async {
