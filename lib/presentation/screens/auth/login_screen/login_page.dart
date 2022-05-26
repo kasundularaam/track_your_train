@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                     vSpacer(5),
                     textP("Email", 12),
                     vSpacer(1),
-                    inputText(emailCtrl, hint: "example@tyt.com"),
+                    inputEmail(emailCtrl, hint: "example@tyt.com"),
                     vSpacer(2),
                     textP("Password", 12),
                     vSpacer(1),

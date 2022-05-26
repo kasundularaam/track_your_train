@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:track_your_train/core/components/components.dart';
 
 import 'package:track_your_train/data/models/train_location.dart';
 
+import '../../../../../core/constants/strings.dart';
 import '../../../../../core/themes/app_colors.dart';
 
 class DetailView extends StatelessWidget {
@@ -17,66 +19,71 @@ class DetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 5.w),
+      padding: EdgeInsets.all(5.w),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
-            height: 3.h,
-          ),
-          Center(
-            child: Container(
-              width: 15.w,
-              height: 1.2.h,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(1.h),
-                color: AppColors.lightElv2,
-              ),
+          ClipOval(
+            child: Image.asset(
+              Strings.trainProfileImg,
+              width: 30.w,
+              height: 30.w,
             ),
           ),
-          SizedBox(
-            height: 3.h,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 4.h),
+            child: const Divider(
+              color: AppColors.darkElv1,
+            ),
           ),
-          Center(
-            child: Wrap(children: [
+          Row(
+            children: [
               Text(
-                trainLocation.trainName,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
+                "Train:",
                 style: TextStyle(
-                  color: AppColors.primaryColor,
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w600,
-                ),
+                    color: AppColors.darkElv0,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400),
               ),
-            ]),
-          ),
-          SizedBox(
-            height: 2.h,
-          ),
-          Center(
-            child: RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                  text: "Train No: ",
+              SizedBox(
+                width: 2.w,
+              ),
+              Expanded(
+                child: Text(
+                  trainLocation.trainName,
+                  textAlign: TextAlign.end,
                   style: TextStyle(
                       color: AppColors.darkElv1,
-                      fontSize: 14.sp,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w400),
                 ),
-                TextSpan(
-                  text: trainLocation.trainId,
-                  style: TextStyle(
-                      color: AppColors.darkElv0,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold),
-                )
-              ]),
-            ),
+              ),
+            ],
           ),
-          SizedBox(
-            height: 2.h,
+          vSpacer(2),
+          Row(
+            children: [
+              Text(
+                "Train Id:",
+                style: TextStyle(
+                    color: AppColors.darkElv0,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400),
+              ),
+              SizedBox(
+                width: 2.w,
+              ),
+              Expanded(
+                child: Text(
+                  trainLocation.trainId,
+                  textAlign: TextAlign.end,
+                  style: TextStyle(
+                      color: AppColors.darkElv1,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+            ],
           ),
         ],
       ),

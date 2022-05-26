@@ -18,7 +18,7 @@ class SearchBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: AppColors.primaryColor.withOpacity(0.15),
+          color: AppColors.lightElv0,
           borderRadius: BorderRadius.circular(1.5.w)),
       child: TextField(
         controller: searchController,

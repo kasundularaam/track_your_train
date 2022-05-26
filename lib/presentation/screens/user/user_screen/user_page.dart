@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
+import 'package:track_your_train/data/models/app_user.dart';
+
 import '../../../../core/components/components.dart';
 import '../../../../core/constants/strings.dart';
 import '../../../../core/themes/app_colors.dart';
-import '../../../../data/models/type_user.dart';
 import '../../../../logic/cubit/all_trains_cubit/all_trains_cubit.dart';
 import '../../../../logic/cubit/sign_out_cubit/sign_out_cubit.dart';
 import '../../../router/app_router.dart';
 import 'widgets/user_map.dart';
 
 class UserPage extends StatefulWidget {
-  final TypeUser typeUser;
+  final AppUser user;
   const UserPage({
     Key? key,
-    required this.typeUser,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -23,7 +24,7 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  TypeUser get typeUser => widget.typeUser;
+  AppUser get user => widget.user;
   @override
   void dispose() {
     super.dispose();
@@ -115,7 +116,7 @@ class _UserPageState extends State<UserPage> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        "vmUser.name",
+                                        user.userName,
                                         textAlign: TextAlign.end,
                                         style: TextStyle(
                                             color: AppColors.darkElv1,
@@ -140,7 +141,7 @@ class _UserPageState extends State<UserPage> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        "vmUser.email",
+                                        user.userEmail,
                                         textAlign: TextAlign.end,
                                         style: TextStyle(
                                             color: AppColors.darkElv1,

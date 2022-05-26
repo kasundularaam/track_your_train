@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:track_your_train/logic/cubit/check_tickets_cubit/check_tickets_cubit.dart';
 
 import '../../core/exceptions/route_exception.dart';
+import '../../data/models/app_user.dart';
 import '../../data/models/train_details.dart';
 import '../../data/models/type_user.dart';
 import '../../logic/cubit/all_trains_cubit/all_trains_cubit.dart';
 import '../../logic/cubit/booking_cubit/booking_cubit.dart';
+import '../../logic/cubit/check_tickets_cubit/check_tickets_cubit.dart';
 import '../../logic/cubit/landing_screen_cubit/landing_screen_cubit.dart';
 import '../../logic/cubit/login_cubit/login_cubit.dart';
 import '../../logic/cubit/register_cubit/register_cubit.dart';
@@ -38,7 +39,7 @@ class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case userPage:
-        TypeUser typeUser = settings.arguments as TypeUser;
+        final AppUser user = settings.arguments as AppUser;
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
@@ -47,12 +48,12 @@ class AppRouter {
               ),
             ],
             child: UserPage(
-              typeUser: typeUser,
+              user: user,
             ),
           ),
         );
       case driverPage:
-        TypeUser typeUser = settings.arguments as TypeUser;
+        final AppUser user = settings.arguments as AppUser;
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
@@ -61,7 +62,7 @@ class AppRouter {
               ),
             ],
             child: DriverPage(
-              typeUser: typeUser,
+              user: user,
             ),
           ),
         );
@@ -71,7 +72,7 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => CheckTicketsCubit(),
             child: TicketCheckerPage(
-              typeUser: typeUser,
+              user: typeUser,
             ),
           ),
         );

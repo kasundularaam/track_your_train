@@ -7,27 +7,67 @@ class LandingScreenInitial extends LandingScreenState {}
 
 class LandingScreenLoading extends LandingScreenState {}
 
-class LandingScreenSucceed extends LandingScreenState {
-  final TypeUser typeUser;
-  LandingScreenSucceed({
-    required this.typeUser,
+class LandingScreenUser extends LandingScreenState {
+  final AppUser user;
+  LandingScreenUser({
+    required this.user,
   });
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is LandingScreenSucceed && other.typeUser == typeUser;
+    return other is LandingScreenUser && other.user == user;
   }
 
   @override
-  int get hashCode => typeUser.hashCode;
+  int get hashCode => user.hashCode;
 
   @override
-  String toString() => 'LandingScreenSucceed(typeUser: $typeUser)';
+  String toString() => 'LandingScreenUser(user: $user)';
 }
 
-class LandingScreenNoUser extends LandingScreenState {}
+class LandingScreenTrain extends LandingScreenState {
+  final AppUser user;
+  LandingScreenTrain({
+    required this.user,
+  });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is LandingScreenTrain && other.user == user;
+  }
+
+  @override
+  int get hashCode => user.hashCode;
+
+  @override
+  String toString() => 'LandingScreenTrain(user: $user)';
+}
+
+class LandingScreenTicketChecker extends LandingScreenState {
+  final TypeUser user;
+  LandingScreenTicketChecker({
+    required this.user,
+  });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is LandingScreenTicketChecker && other.user == user;
+  }
+
+  @override
+  int get hashCode => user.hashCode;
+
+  @override
+  String toString() => 'LandingScreenTicketChecker(user: $user)';
+}
+
+class LandingScreenToAuth extends LandingScreenState {}
 
 class LandingScreenFailed extends LandingScreenState {
   final String errorMsg;

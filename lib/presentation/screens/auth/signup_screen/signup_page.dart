@@ -1,14 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:track_your_train/logic/cubit/register_cubit/register_cubit.dart';
 
 import '../../../../core/components/components.dart';
 import '../../../../core/themes/app_colors.dart';
+import '../../../../logic/cubit/register_cubit/register_cubit.dart';
 import '../../../router/app_router.dart';
-import '../widgets/auth_text_input.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -65,11 +63,11 @@ class _SignInPageState extends State<SignInPage> {
                     vSpacer(5),
                     textP("Full Name", 12),
                     vSpacer(1),
-                    inputText(nameController, hint: "example"),
+                    inputName(nameController, hint: "example"),
                     vSpacer(2),
                     textP("Email", 12),
                     vSpacer(1),
-                    inputText(emailController, hint: "example@tyt.com"),
+                    inputEmail(emailController, hint: "example@tyt.com"),
                     vSpacer(2),
                     textP("Password", 12),
                     vSpacer(1),

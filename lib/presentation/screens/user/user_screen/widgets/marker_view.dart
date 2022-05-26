@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:track_your_train/core/themes/app_colors.dart';
-import 'package:track_your_train/presentation/screens/user/user_screen/widgets/detail_view.dart';
 
+import '../../../../../core/themes/app_colors.dart';
 import '../../../../../data/models/train_location.dart';
+import 'detail_view.dart';
 
 class MarkerView extends StatelessWidget {
   final TrainLocation trainLocation;

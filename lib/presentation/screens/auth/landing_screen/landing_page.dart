@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:track_your_train/core/components/components.dart';
-
-import '../../../../core/enums/user_type.dart';
+import '../../../../core/components/components.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../logic/cubit/landing_screen_cubit/landing_screen_cubit.dart';
 import '../../../router/app_router.dart';
@@ -18,13 +16,8 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<LandingScreenCubit>(context).startApp();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    BlocProvider.of<LandingScreenCubit>(context).startApp();
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.primaryColor,
@@ -42,33 +35,21 @@ class _LandingPageState extends State<LandingPage> {
               ),
               BlocConsumer<LandingScreenCubit, LandingScreenState>(
                 listener: (context, state) {
-                  if (state is LandingScreenSucceed) {
-                    final UserType userType = state.typeUser.userType;
-                    if (userType == UserType.user) {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        AppRouter.userPage,
-                        (route) => false,
-                        arguments: state.typeUser,
-                      );
-                    } else if (userType == UserType.driver) {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        AppRouter.driverPage,
-                        (route) => false,
-                        arguments: state.typeUser,
-                      );
-                    } else {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        AppRouter.ticketCheckerPage,
-                        (route) => false,
-                        arguments: state.typeUser,
-                      );
-                    }
-                  } else if (state is LandingScreenNoUser) {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      AppRouter.loginPage,
-                      (route) => false,
-                    );
-                  } else if (state is LandingScreenFailed) {
+                  if (state is LandingScreenUser) {
+                    navAndClear(context, AppRouter.userPage, args: state.user);
+                  }
+                  if (state is LandingScreenTrain) {
+                    navAndClear(context, AppRouter.driverPage,
+                        args: state.user);
+                  }
+                  if (state is LandingScreenToAuth) {
+                    navAndClear(context, AppRouter.loginPage);
+                  }
+                  if (state is LandingScreenTicketChecker) {
+                    navAndClear(context, AppRouter.ticketCheckerPage,
+                        args: state.user);
+                  }
+                  if (state is LandingScreenFailed) {
                     showSnackBar(context, state.errorMsg);
                   }
                 },
@@ -77,37 +58,16 @@ class _LandingPageState extends State<LandingPage> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          "something went wrong!",
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontSize: 10.sp,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        TextButton(
-                          onPressed: () =>
-                              BlocProvider.of<LandingScreenCubit>(context)
-                                  .startApp(),
-                          child: const Text(
+                        textD("something went wrong!", 14),
+                        vSpacer(2),
+                        buttonFilledP(
                             "RETRY",
-                            style: TextStyle(
-                              color: AppColors.primaryColor,
-                            ),
-                          ),
-                        ),
+                            () => BlocProvider.of<LandingScreenCubit>(context)
+                                .startApp()),
                       ],
                     );
                   } else {
-                    return Text(
-                      "Loading...",
-                      style: TextStyle(
-                        color: AppColors.primaryColor,
-                        fontSize: 10.sp,
-                      ),
-                    );
+                    return textP("TRACK YOUR TRAIN", 22, bold: true);
                   }
                 },
               )
