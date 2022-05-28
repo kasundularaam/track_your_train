@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -23,7 +21,6 @@ class _UserMapState extends State<UserMap> {
     return BlocListener<AllTrainsCubit, AllTrainsState>(
       listener: (context, state) {
         if (state is AllTrainsLoaded) {
-          log(state.markers.length.toString());
           setState(() {
             markers = state.markers;
           });

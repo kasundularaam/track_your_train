@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import '../../core/exceptions/route_exception.dart';
@@ -18,7 +17,6 @@ class HTTPServices {
           DataProvider.stationsUrl(),
         ),
       );
-      log(response.body);
       if (response.statusCode == 200) {
         return HttpListConverter.parseStations(response.body);
       } else {
@@ -39,7 +37,6 @@ class HTTPServices {
           DataProvider.trainSearchUrl(start: start, end: end),
         ),
       );
-      log(response.body);
       if (response.statusCode == 200) {
         return HttpListConverter.parseTrains(response.body);
       } else {

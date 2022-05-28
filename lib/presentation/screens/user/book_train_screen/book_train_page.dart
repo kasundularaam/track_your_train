@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:sizer/sizer.dart';
-import 'package:track_your_train/data/models/booking.dart';
-import 'package:track_your_train/logic/cubit/booking_cubit/booking_cubit.dart';
-import 'package:track_your_train/presentation/screens/user/book_train_screen/widgets/booking_input.dart';
+import 'package:uuid/uuid.dart';
 import '../../../../core/themes/app_colors.dart';
+import '../../../../data/models/booking.dart';
 import '../../../../data/models/train_details.dart';
+import '../../../../data/models/type_user.dart';
+import '../../../../data/shared/shared_auth.dart';
+import '../../../../logic/cubit/booking_cubit/booking_cubit.dart';
+import 'widgets/booking_input.dart';
 
 class BookTrainPage extends StatefulWidget {
   final TrainDetails trainDetails;
@@ -30,14 +33,24 @@ class _BookTrainPageState extends State<BookTrainPage> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController ticketsController = TextEditingController();
 
-  bookTrain() {
+  bookTrain() async {
+    var uuid = const Uuid();
+
+    final TypeUser user = await SharedAuth.getUser();
+    final int timestamp = DateTime.now().millisecondsSinceEpoch;
+
     Booking booking = Booking(
+        id: uuid.v4(),
         userNic: nicController.text,
         userName: nameController.text,
         userEmail: emailController.text,
         userPhone: phoneController.text,
         ticketCount: int.parse(ticketsController.text),
-        trainId: trainDetails.trainNumber);
+        trainId: trainDetails.trainNumber,
+        uid: user.userId,
+        timeStamp: timestamp,
+        trainNumber: trainDetails.trainNumber,
+        checked: false);
     BlocProvider.of<BookingCubit>(context).addBooking(booking: booking);
   }
 

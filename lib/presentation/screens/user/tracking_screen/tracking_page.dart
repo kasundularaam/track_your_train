@@ -112,6 +112,28 @@ class _TrackingPageState extends State<TrackingPage> {
                                 RichText(
                                   text: TextSpan(children: [
                                     TextSpan(
+                                      text: "Train number: ",
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: AppColors.darkElv1,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: StringFormatter.capitalize(
+                                          string: trainDetails.trainNumber),
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: AppColors.darkElv0,
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                                SizedBox(
+                                  height: 1.h,
+                                ),
+                                RichText(
+                                  text: TextSpan(children: [
+                                    TextSpan(
                                       text: "Start Station: ",
                                       style: TextStyle(
                                         fontSize: 14.sp,

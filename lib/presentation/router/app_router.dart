@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:track_your_train/logic/cubit/show_bookings_cubit/show_bookings_cubit.dart';
+import 'package:track_your_train/presentation/screens/show_qr_screen/show_qr_page.dart';
+import 'package:track_your_train/presentation/screens/user/bookings_screen/bookings_page.dart';
 
 import '../../core/exceptions/route_exception.dart';
 import '../../data/models/app_user.dart';
@@ -33,6 +36,8 @@ class AppRouter {
   static const String searchPage = '/searchPage';
   static const String trackingPage = '/trackingPage';
   static const String bookTrainPage = '/bookTrainPage';
+  static const String bookingsPage = '/bookingsPage';
+  static const String showQrPage = '/showQrPage';
 
   const AppRouter._();
 
@@ -106,6 +111,24 @@ class AppRouter {
               ),
             ],
             child: const SearchPage(),
+          ),
+        );
+      case bookingsPage:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => ShowBookingsCubit(),
+              ),
+            ],
+            child: const BookingsPage(),
+          ),
+        );
+      case showQrPage:
+        final String id = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => ShowQrPage(
+            id: id,
           ),
         );
       case trackingPage:

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:track_your_train/core/themes/app_colors.dart';
-import 'package:track_your_train/data/converters/string_formatter.dart';
-import 'package:track_your_train/presentation/router/app_router.dart';
 
+import '../../../../../core/themes/app_colors.dart';
+import '../../../../../data/converters/string_formatter.dart';
 import '../../../../../data/models/train_details.dart';
+import '../../../../router/app_router.dart';
 
 class ResultCard extends StatelessWidget {
   final TrainDetails trainDetails;
@@ -48,6 +48,28 @@ class ResultCard extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 2.h,
+                ),
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                      text: "Train number: ",
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                    TextSpan(
+                      text: StringFormatter.capitalize(
+                          string: trainDetails.trainNumber),
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: AppColors.darkElv0,
+                      ),
+                    ),
+                  ]),
+                ),
+                SizedBox(
+                  height: 1.h,
                 ),
                 RichText(
                   text: TextSpan(children: [

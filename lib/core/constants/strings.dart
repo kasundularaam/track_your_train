@@ -9,5 +9,7 @@ class Strings {
   static const driverImg = 'assets/images/driver.png';
   static const profileImg = 'assets/images/profile.png';
   static const trainImg = 'assets/images/train.png';
+  static const bookingLoadingImg = 'assets/images/booking_loading.gif';
+  static const ticketsImg = 'assets/images/tickets.png';
   static const trainProfileImg = 'assets/images/train_profile.png';
 }

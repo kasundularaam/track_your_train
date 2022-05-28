@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:track_your_train/core/components/components.dart';
 
+import '../../../../core/components/components.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../data/models/station.dart';
 import '../../../../logic/cubit/search_trains_cubit/search_trains_cubit.dart';

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -20,7 +18,6 @@ class LandingScreenCubit extends Cubit<LandingScreenState> {
       bool signed = await SharedAuth.signed();
       if (signed) {
         TypeUser typeUser = await SharedAuth.getUser();
-        log(typeUser.toString());
         if (typeUser.userType == UserType.user) {
           final AppUser user = await FireAuth.getUserData();
           emit(LandingScreenUser(user: user));

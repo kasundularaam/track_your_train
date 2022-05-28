@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:track_your_train/data/models/app_user.dart';
 
+import '../models/app_user.dart';
 import '../models/type_user.dart';
 
 class FireAuth {
